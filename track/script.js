@@ -73,10 +73,26 @@ let currentAlbum = null;
 let trackDatabase = null;
 
 function getTrackSlug() {
-
     const params = new URLSearchParams(window.location.search);
-    return params.get("s");
+    const s = params.get("s");
+    if (s) return s;
 
+    let path = window.location.pathname;
+
+    path = path.replace(/^\/|\/$/g, '');
+
+    const segments = path.split('/');
+
+    let last = segments[segments.length - 1];
+    if (last.endsWith('.html')) {
+        last = last.slice(0, -5);
+    }
+
+    if (last && last !== 'track') {
+        return last;
+    }
+
+    return null;
 }
 
 async function loadTrackDatabase() {

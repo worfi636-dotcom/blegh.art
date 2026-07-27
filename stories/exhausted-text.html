@@ -82,21 +82,32 @@
         </section>
 
         <!-- КНОПКА ДЛЯ КОНТЕКСТА -->
-        <section class="references" style="margin-top: 40px;">
-            <button id="context-toggle" class="reference-button" style="background: none; color: #9DA192; padding: 12px 30px; font-size: 1.1rem; cursor: pointer; transition: 0.3s;">
-                Я прочитал
-            </button>
-            <div id="context-block" style="display: none; margin-top: 30px; padding: 20px; background: rgba(157, 161, 146, 0.08); border-left: 3px solid #9DA192; border-radius: 4px;">
-                <h2 style="color: #9DA192; font-weight: 400; letter-spacing: 1px; margin-bottom: 15px;">Контекст</h2>
-                <!-- СЮДА ВСТАВИТЕ ТЕКСТ О ЛИМЕРЕНЦИИ И LOVEBOMBING -->
-                <p style="color: #c8cdc0; line-height: 1.7;">
-                    [Этот текст был написан мной в состоянии лимеренции. Лимеренция — это... Также ухудшал привязанность так называемый lovebombing...]
-                </p>
-                <p style="color: #c8cdc0; line-height: 1.7; margin-top: 15px;">
-                    [Раскройте здесь все детали, которые вы подготовили для второго прочтения.]
-                </p>
-            </div>
-        </section>
+        <!-- КНОПКА КОНТЕКСТА (как References) -->
+<section class="references" style="margin-top: 40px;">
+
+    <div class="reference">
+        <!-- Кнопка-ссылка, белый текст -->
+        <div class="reference-button" id="context-toggle">
+            Я прочитал
+        </div>
+
+        <!-- Скрытый блок с контекстом -->
+        <div class="reference-content" id="context-block">
+            <h2 style="color: #9DA192; font-weight: 400; letter-spacing: 1px; margin-bottom: 15px;">
+                Контекст
+            </h2>
+            <p style="color: #c8cdc0; line-height: 1.7;">
+                Этот текст был написан мной в состоянии <strong>лимеренции</strong>.
+                Лимеренция — это психологическое состояние навязчивой, одержимой влюбленности...
+                (весь ваш текст о лимеренции и lovebombing)
+            </p>
+            <p style="color: #c8cdc0; line-height: 1.7; margin-top: 15px;">
+                Все метафоры в рассказе — «туман», «эхо», «камень между двух дорог» — это точное описание внутреннего хаоса...
+            </p>
+        </div>
+    </div>
+
+</section>
 
     </main>
 
@@ -121,19 +132,24 @@
         }
     })();
 
-    // Кнопка показа контекста
+    // Кнопка контекста — как References
     document.addEventListener('DOMContentLoaded', function() {
-        const toggleBtn = document.getElementById('context-toggle');
-        const contextBlock = document.getElementById('context-block');
-        if (toggleBtn && contextBlock) {
-            toggleBtn.addEventListener('click', function() {
-                const isHidden = contextBlock.style.display === 'none';
-                contextBlock.style.display = isHidden ? 'block' : 'none';
-                toggleBtn.textContent = isHidden ? 'Скрыть контекст' : 'Я прочитал';
+        const toggle = document.getElementById('context-toggle');
+        const block = document.getElementById('context-block');
+
+        if (toggle && block) {
+            toggle.addEventListener('click', function() {
+                // Убираем active у всех других (как в References)
+                document.querySelectorAll('.reference-content').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.reference-button').forEach(el => el.classList.remove('active'));
+
+                // Добавляем active текущим
+                block.classList.add('active');
+                toggle.classList.add('active');
             });
         }
 
-        // Автоматический год в футере
+        // Год в футере
         const yearSpan = document.getElementById('copyright-year');
         if (yearSpan) {
             yearSpan.textContent = new Date().getFullYear();

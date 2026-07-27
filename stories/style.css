@@ -261,6 +261,36 @@
     z-index:0;
 
 }
+/* Кнопка как ссылка */
+.reference-button#context-toggle {
+    color: #fff;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.1rem;
+    font-weight: 400;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.reference-button#context-toggle:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+/* Скрытый блок — такой же, как в References */
+.reference-content#context-block {
+    display: none;
+    margin-top: 20px;
+    padding: 20px 0 0 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.reference-content#context-block.active {
+    display: block;
+}
 
 .track-layout,
 .top-header,
